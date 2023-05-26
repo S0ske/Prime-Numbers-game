@@ -1,0 +1,56 @@
+#include <iostream>
+#include <locale>
+#include <windows.h>
+#include <conio.h>
+#include <cstdlib>
+using namespace std;
+
+char opcion;
+int ran_max, num_random;
+
+int main(){
+setlocale (LC_ALL, "spanish");
+system( "Title Prime Numbers Game" );
+system("Color 3e");	
+do{
+	cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
+    cout<<"                                             Prime Numbers Game                         "<<endl<<endl;
+	cout<<"                                         1. Iniciar Juego                         "<<endl<<endl;
+	cout<<"                                         2. Estadisticas                         "<<endl<<endl;
+	cout<<"                                         3. Salir                         "<<endl<<endl;
+
+       opcion = getch();
+
+        switch (opcion) {
+            case '1':
+            	system ("cls");
+            	cout<<"Ingrese un número para el rango maximo: ";
+            	cin>>ran_max;
+            	if (ran_max <= 1) {
+        cout << "Error: El rango máximo debe ser mayor que 1." <<endl;
+        return 0;
+    }
+    num_random = 1 + rand() % ran_max;
+
+            	system ("cls");
+            	cout<<num_random <<endl;
+            	system("pause");
+            	system ("cls");
+                break;
+            case '2':
+            system ("cls");
+                break;
+            case '3':
+            	system ("cls");
+                 cout << "Saliendo del programa..." <<endl;
+				 exit (0);    
+                break;
+            default:
+            	system ("cls");
+                cout<< "Opción inválida" <<endl;
+                break;
+        }	
+}while (opcion != 3);
+
+	
+}//main
