@@ -30,7 +30,6 @@ do{
             	if (ran_max <= 1) 
         cout << "Error: El rango máximo debe ser mayor que 1." <<endl;
                 system ("pause");
-                getch ();
             } while (ran_max <= 1);
     
     num_random = 1 + rand() % ran_max;
@@ -42,7 +41,6 @@ do{
             	if (vidas < 1) 
         cout << "Error: Debe tener 1 vida o más." <<endl;
                 system ("pause");
-                getch ();
             } while (vidas < 1);
             	
             	system ("cls");
