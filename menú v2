@@ -23,12 +23,16 @@ do{
 
         switch (opcion) {
             case '1':
-            	system ("cls");
+            	do{
+           
+        	system ("cls");
             	cout<<"Ingrese un número para el rango maximo: ";
             	cin>>ran_max;
-            	if (ran_max <= 1) {
+            	if (ran_max <= 1) 
         cout << "Error: El rango máximo debe ser mayor que 1." <<endl;
-        return 0;
+                system ("pause");
+                getch ();
+            } while (ran_max <= 1);
     }
     num_random = 1 + rand() % ran_max;
 
