@@ -2,9 +2,11 @@
 #include <locale>
 #include <windows.h>
 #include <conio.h>
+#include <cstdlib>
 using namespace std;
 
 char opcion;
+int ran_max, num_random, vidas;
 
 int main(){
 setlocale (LC_ALL, "spanish");
@@ -21,8 +23,29 @@ do{
 
         switch (opcion) {
             case '1':
+            	do{
+        	system ("cls");
+            	cout<<"Ingrese un número para el rango maximo: ";
+            	cin>>ran_max;
+            	if (ran_max <= 1) 
+        cout << "Error: El rango máximo debe ser mayor que 1." <<endl;
+                system ("pause");
+                getch ();
+            } while (ran_max <= 1);
+    
+    num_random = 1 + rand() % ran_max;
+
+            do{
+        	system ("cls");
+            	cout<<"Ingrese el número de vidas que desee: ";
+            	cin>>vidas;
+            	if (vidas < 1) 
+        cout << "Error: Debe tener 1 vida o más." <<endl;
+                system ("pause");
+                getch ();
+            } while (vidas < 1);
+            	
             	system ("cls");
-            	cout<<"Ingrese un número para el rango "
                 break;
             case '2':
             system ("cls");
@@ -35,8 +58,11 @@ do{
             default:
             	system ("cls");
                 cout<< "Opción inválida" <<endl;
+		system("pause");
+		system ("cls");
                 break;
-        }	
+        }
+	
 }while (opcion != 3);
 
 	
