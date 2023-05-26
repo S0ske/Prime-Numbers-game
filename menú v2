@@ -48,6 +48,7 @@ do{
             default:
             	system ("cls");
                 cout<< "Opción inválida" <<endl;
+		system("pause");
                 break;
         }	
 }while (opcion != 3);
