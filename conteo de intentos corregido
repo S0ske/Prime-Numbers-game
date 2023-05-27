@@ -6,13 +6,15 @@
 using namespace std;
 
 char opcion;
-int ran_max, num_random, vidas, numero, intentos;
+int ran_max, num_random, vidas, numero, intentos=0;
 
 int main(){
 setlocale (LC_ALL, "spanish");
 system( "Title Prime Numbers Game" );
-system("Color 3e");	
+HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
 do{
+system("Color 3e");	
+intentos=0;	
 cout << "         ____       _                   _   __                __                      ______                   " << endl;
     cout << "        / __ \\_____(_)___ ___  ___     / | / /_  ______ ___  / /_  ___  __________   / ____/___ _____ ___  ___ " << endl;
     cout << "       / /_/ / ___/ / __ `__ \\/ _ \\   /  |/ / / / / __ `__ \\/ __ \\/ _ \\/ ___/ ___/  / / __/ __ `/ __ `__ \\/ _ \\" << endl;
@@ -81,22 +83,46 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
             	
                                  
             	if(num_random == numero){
+            		
             		system ("cls");
-            	    cout << "    ____     ___      _     __          __         " << endl;
+					Beep(900, 800);
+				for (int i = 0; i < 5; ++i) {
+					
+					system ("cls");
+					system("Color 72");	
+				cout << "    ____     ___      _     __          __         " << endl;
     cout << "   / __/__  / (_)____(_)___/ /___ _____/ /__  _____" << endl;
     cout << "  / /_/ _ \\/ / / ___/ / __  / __ `/ __  / _ \\/ ___/" << endl;
     cout << " / __/  __/ / / /__/ / /_/ / /_/ / /_/ /  __(__  )" << endl;
     cout << "/_/  \\___/_/_/\\___/_/\\__,_/\\__,_/\\__,_/\\___/____/ " << endl;
     cout << "                                                   " << endl;
-     system ("pause");
-	 system ("cls");
-     cout<<"Adivinó el número oculto en " <<intentos <<" intentos";
+				cout<<"Adivinó el número oculto en " <<intentos <<" intentos";
+				Sleep(500);
+				system("Color e2");	
+				
+				Sleep(500);
+        
+    }
+	
             	Sleep(3000);
 				}
 				
 				else{
 					system ("cls");
-				cout<<"Perdiste, El número oculto era " <<num_random;
+					Beep(700, 800);
+				for (int i = 0; i < 5; ++i) {
+					
+					system ("cls");
+					system("Color 04");	
+				cout<<"¡PERDISTE!"<<endl;
+				cout<<"El número oculto era: " <<num_random;
+				Sleep(500);
+				system("Color 74");	
+				
+				Sleep(500);
+        
+    }
+	
 					
 				Sleep(3000);
 				}
