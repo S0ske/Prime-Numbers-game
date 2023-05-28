@@ -1,0 +1,16 @@
+#include<iostream>
+#include<clocale>
+
+using namespace std;
+
+int main(){
+	
+	setlocale(LC_CTYPE, "Spanish");
+	cout<<"Los números primos son muy importantes en muchas cosas que usamos todos los días. Por ejemplo, cuando jugamos video-"<<endl;
+	cout<<"juegos o usamos contraseñas en nuestra computadora, los números primos nos ayudan a mantenernos seguros. Los cientí-"<<endl;
+	cout<<"ficos usan estos números para proteger la información y mantenerla privada. También se encuentran presentes en las"<<endl;
+	cout<<"matemáticas y la ciencia de la computación. Los matemáticos estudian los números primos y descubren cosas interesan-"<<endl;
+	cout<<"tes sobre ellos. Además, los números primos se utilizan en las computadoras para hacer muchas cosas, como crear nú-"<<endl;
+	cout<<"meros aleatorios en juegos o en programas especiales.";
+
+}
