@@ -7,7 +7,7 @@ using namespace std;
 
 char opcion, opcion_m2;
 int ran_max, num_random, vidas, numero, intentos=0, potenciacion=1, n2, valor_max=0, valor_min=0, divisiones = 1, residuo=0, num_ingresados=0;
-float aciertos=0, desaciertos=0, cant_nump=0, cant_numc=0,cant_numS=0, cant_numW=0, cant_numM=0;
+float aciertos=0, intentos_total=0, cant_nump=0, cant_numc=0,cant_numS=0, cant_numW=0, cant_numM=0;
 
 int main(){
 setlocale (LC_ALL, "spanish");
@@ -16,7 +16,7 @@ HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
 do{
 		system("Color 3e");	
 intentos=0;	
-cout << "         ____       _                   _   __                __                      ______                   " << endl;
+    cout << "         ____       _                   _   __                __                      ______                   " << endl;
     cout << "        / __ \\_____(_)___ ___  ___     / | / /_  ______ ___  / /_  ___  __________   / ____/___ _____ ___  ___ " << endl;
     cout << "       / /_/ / ___/ / __ `__ \\/ _ \\   /  |/ / / / / __ `__ \\/ __ \\/ _ \\/ ___/ ___/  / / __/ __ `/ __ `__ \\/ _ \\" << endl;
     cout << "      / ____/ /  / / / / / / /  __/  / /|  / /_/ / / / / / / /_/ /  __/ /  (__  )  / /_/ / /_/ / / / / / /  __/" << endl;
@@ -57,14 +57,12 @@ cout << "         ____       _                   _   __                __       
             } while (ran_max <= 1);
     
     num_random = 1 + rand() % ran_max;
-    
               if(num_random > valor_max){
               	valor_max = num_random;
 			  }
 			  
 			  if (valor_min == 0 or num_random < valor_min ){ 
-			  valor_min = num_random;
-			  	
+			  valor_min = num_random;	
 			  }
             do{
         	system ("cls");
@@ -95,30 +93,31 @@ cout << "         ____       _                   _   __                __       
                                  
             	if(num_random == numero){
             		system ("cls");
+            		aciertos++;
+            		intentos_total++;
 					Beep(900, 800);
 				for (int i = 0; i < 5; ++i) {
-					
 					system ("cls");
 					system("Color 72");	
 				cout << "    ____     ___      _     __          __         " << endl;
-    cout << "   / __/__  / (_)____(_)___/ /___ _____/ /__  _____" << endl;
-    cout << "  / /_/ _ \\/ / / ___/ / __  / __ `/ __  / _ \\/ ___/" << endl;
-    cout << " / __/  __/ / / /__/ / /_/ / /_/ / /_/ /  __(__  )" << endl;
-    cout << "/_/  \\___/_/_/\\___/_/\\__,_/\\__,_/\\__,_/\\___/____/ " << endl;
-    cout << "                                                   " << endl;
+        cout << "   / __/__  / (_)____(_)___/ /___ _____/ /__  _____" << endl;
+        cout << "  / /_/ _ \\/ / / ___/ / __  / __ `/ __  / _ \\/ ___/" << endl;
+        cout << " / __/  __/ / / /__/ / /_/ / /_/ / /_/ /  __(__  )" << endl;
+        cout << "/_/  \\___/_/_/\\___/_/\\__,_/\\__,_/\\__,_/\\___/____/ " << endl;
+        cout << "                                                   " << endl;
 				cout<<"Adivinó el número oculto en " <<intentos <<" intentos";
 				Sleep(500);
 				system("Color e2");	
 				
 				Sleep(500);
-        
+      
     }
-	           aciertos++;
             	Sleep(3000);
 				}
 				
 				else{
 					system ("cls");
+					intentos_total++;
 					Beep(700, 800);
 				for (int i = 0; i < 5; ++i) {
 					
@@ -130,10 +129,7 @@ cout << "         ____       _                   _   __                __       
 				system("Color 74");	
 				
 				Sleep(500);
-        
-    }
-	
-				desaciertos++;	
+                }	
 				Sleep(3000);
 				}
                 
@@ -144,27 +140,29 @@ cout << "         ____       _                   _   __                __       
 				cout<<"El número 1 solo tiene un divisor, que es 1, por lo tanto no es un número primo ni tampoco compuesto. " <<endl;
 				}
 				        
-				    do {
-		            if (num_random%divisiones == 0){
+				 if(num_random > 1){
+				  do {
+		            if (num_random % divisiones == 0){
 			        residuo++;
 		          }
 		          divisiones++;
-				  }while (divisiones <=num_random);
+		          
+				  }while (divisiones <= num_random);
 
-  if (residuo == 2 or num_random == 2 or num_random == 3) {
-                cout<<"El número " <<num_random <<" es primo";
-				Sleep (3000);	
-                system ("cls");
-    cout<<"Los números primos son aquellos cuales tienen 2 divisores: el número 1 y el mismo número."<<endl;            
-    cout<<"Los números primos son muy importantes en muchas cosas que usamos todos los días. Por ejemplo, cuando jugamos video-"<<endl;
-	cout<<"juegos o usamos contraseñas en nuestra computadora, los números primos nos ayudan a mantenernos seguros. Los cientí-"<<endl;
-	cout<<"ficos usan estos números para proteger la información y mantenerla privada. También se encuentran presentes en las"<<endl;
-	cout<<"matemáticas y la ciencia de la computación. Los matemáticos estudian los números primos y descubren cosas interesan-"<<endl;
-	cout<<"tes sobre ellos. Además, los números primos se utilizan en las computadoras para hacer muchas cosas, como crear nú-"<<endl;
-	cout<<"meros aleatorios en juegos o en programas especiales." <<endl;
-                cant_nump++;
-                system ("pause");
-                system ("cls");
+                    if (residuo == 2 ) {
+                    cout<<"El número " <<num_random <<" es primo";
+				    Sleep (3000);	
+                    system ("cls");
+                    cout<<"Los números primos son aquellos cuales tienen 2 divisores: el número 1 y el mismo número."<<endl;            
+                    cout<<"Los números primos son muy importantes en muchas cosas que usamos todos los días. Por ejemplo, cuando jugamos video-"<<endl;
+	                cout<<"juegos o usamos contraseñas en nuestra computadora, los números primos nos ayudan a mantenernos seguros. Los cientí-"<<endl;
+            	    cout<<"ficos usan estos números para proteger la información y mantenerla privada. También se encuentran presentes en las"<<endl;
+            	    cout<<"matemáticas y la ciencia de la computación. Los matemáticos estudian los números primos y descubren cosas interesan-"<<endl;
+	                cout<<"tes sobre ellos. Además, los números primos se utilizan en las computadoras para hacer muchas cosas, como crear nú-"<<endl;
+                	cout<<"meros aleatorios en juegos o en programas especiales." <<endl;
+                    cant_nump++;
+                    system ("pause");
+                    system ("cls");
                 do{
                     cout<<"                                _____                                     _                     " << endl;
                     cout<<"                               / ___/__  ______  ___  _____   ____  _____(_)___ ___  ____  _____" << endl;
@@ -256,6 +254,7 @@ cout << "         ____       _                   _   __                __       
 
  
               else {
+            
 			n2=num_random;
 			cant_numc++;
 			cout<<"El número " <<num_random <<" es compuesto" <<endl;
@@ -268,22 +267,24 @@ cout << "         ____       _                   _   __                __       
                       }
 				cout<<endl;
 				cout<<"Su descomposicion en factores primos es: "<<endl;
-			for (int w = 2; w <= num_random; ++w) {
-        while (num_random % w == 0) {
+			for (int w = 2; w <= n2; ++w) {
+          while (n2 % w == 0) {
             cout << w;
-            num_random /= w;
-            if(w<num_random){
+            n2 /= w;
+            if(w<=n2){
             	cout<<"*";
             }
             
         }
 }
-cout<<"="<<n2;	  	
+cout<<"="<<num_random;	  	
 				}
 				cout<<endl;
 				system ("pause");
             	system ("cls");
                 break;
+				 } 
+				   
             case '2':
             system ("cls");	
               cout<<"Números ingresados por el usuario: "<<num_ingresados<<endl;
@@ -299,11 +300,11 @@ cout<<"="<<n2;
                     cout<<"    Porcentaje de números primos de Sophie Germain: 0%" <<endl;
                     cout<<"    Porcentaje de números primos de Mersenne: 0%" <<endl;
             	}else{
-            		cout<<"Porcentaje de aciertos: "<<aciertos/(aciertos+desaciertos)*100<<"%"<<endl;
-            		cout<<"Porcentaje de números primos: " <<cant_nump/(cant_nump+cant_numc)*100<<"%" <<endl;
-                    cout<<"    Porcentaje de números primos de Wagstaff: " <<cant_numW/cant_nump*100<<"%" <<endl;
-                    cout<<"    Porcentaje de números primos de Sophie Germain: " <<cant_numS/cant_nump*100<<"%" <<endl;
-                    cout<<"    Porcentaje de números primos de Mersenne: " <<cant_numM/cant_nump*100<<"%" <<endl;
+            		cout<<"Porcentaje de aciertos: "<<aciertos/intentos_total*100 <<"%"<<endl;
+            		cout<<"Porcentaje de números primos: " <<cant_nump/(cant_nump+cant_numc)*100 <<"%" <<endl;
+                    cout<<"    Porcentaje de números primos de Wagstaff: " <<cant_numW/cant_nump*100 <<"%" <<endl;
+                    cout<<"    Porcentaje de números primos de Sophie Germain: " <<cant_numS/cant_nump*100 <<"%" <<endl;
+                    cout<<"    Porcentaje de números primos de Mersenne: " <<cant_numM/cant_nump*100 <<"%" <<endl;
             	}
             cout<<"Mayor número generado: "<<valor_max <<endl;
             cout<<"Menor número generado: "<<valor_min <<endl;
