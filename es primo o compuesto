@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+int main(){
+	int numero, residuo = 0, divisiones = 1;
+	cout<< "ingrese un numero"<<endl;
+	cin>>numero;
+	do {
+		if (numero%divisiones == 0){
+			residuo ++;
+		}
+		divisiones++;
+		
+		
+	}while (divisiones <=numero);
+	
+if (residuo == 2) {
+	cout<< "el numero es primo"<<endl;
+	
+} else {
+	
+		cout<< "el numero es compuesto"<<endl;
+}
+
+	
+}
