@@ -6,7 +6,8 @@
 using namespace std;
 
 char opcion, opcion_m2;
-int ran_max, num_random, vidas, numero, intentos=0, cant_nump=0, cant_numc=0, potenciacion=1;
+int ran_max, num_random, vidas, numero, intentos=0, potenciacion=1, n2, valor_max=0, valor_min=0, divisiones = 1, residuo=0, num_ingresados=0;
+float aciertos=0, desaciertos=0, cant_nump=0, cant_numc=0,cant_numS=0, cant_numW=0, cant_numM=0;
 
 int main(){
 setlocale (LC_ALL, "spanish");
@@ -35,18 +36,16 @@ cout << "         ____       _                   _   __                __       
             	system ("cls");
             	cout<<"El juego consiste en adivinar un número aleatorio asignado por el computador." <<endl <<endl;
             	cout<<"Reglas:" <<endl <<endl;
-            	cout<<"(1). Por cada intento fallido se le resta una vida al jugador," <<endl;
-            	cout<<"pero también el programa va a proporcionar una pista relacionada al número oculto." <<endl <<endl;
-            	cout<<"(2). El primer intento es de prueba, por lo cual si se falla no se descuenta la vida," <<endl;
-            	cout<<"pero desde el segundo intento va a ir disminuyendo." <<endl <<endl;
+            	cout<<"(1). Por cada intento fallido se le resta una vida al jugador" <<endl <<endl;
+            	cout<<"(2). El programa va a proporcionar una pista relacionada al número oculto." <<endl <<endl;
             	cout<<"(3). Recuerda que el juego termina cuando aciertes el número o cuando pierdas todas tus vidas."<<endl;
             	system ("pause");
             	system ("cls");	
             	cout << "   _____                 __     " <<endl;
-cout << "  / ___/__  _____  _____/ /____ " <<endl;
-cout << "  \\__ \\/ / / / _ \\/ ___/ __/ _ \\" <<endl;
-cout << " ___/ / /_/ /  __/ /  / /_/  __/" <<endl;
-cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
+                cout << "  / ___/__  _____  _____/ /____ " <<endl;
+                cout << "  \\__ \\/ / / / _ \\/ ___/ __/ _ \\" <<endl;
+                cout << " ___/ / /_/ /  __/ /  / /_/  __/" <<endl;
+                cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
             	Sleep(1000);
 				do{
         	system ("cls");
@@ -58,7 +57,15 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
             } while (ran_max <= 1);
     
     num_random = 1 + rand() % ran_max;
-
+    
+              if(num_random > valor_max){
+              	valor_max = num_random;
+			  }
+			  
+			  if (valor_min == 0 or num_random < valor_min ){ 
+			  valor_min = num_random;
+			  	
+			  }
             do{
         	system ("cls");
             	cout<<"Ingrese el número de vidas que desee: ";
@@ -73,6 +80,7 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
             	do{
             	cout<<"Ingrese un número:                                    "; cout<<"Vidas: "<<vidas <<endl; 
 				cin>>numero;
+				num_ingresados++;
 				
 				if (num_random > numero){
 				cout<<"El número oculto es mayor al que digitó " <<endl;	
@@ -86,7 +94,6 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
             	
                                  
             	if(num_random == numero){
-            		
             		system ("cls");
 					Beep(900, 800);
 				for (int i = 0; i < 5; ++i) {
@@ -106,7 +113,7 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
 				Sleep(500);
         
     }
-	
+	           aciertos++;
             	Sleep(3000);
 				}
 				
@@ -126,25 +133,35 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
         
     }
 	
-					
+				desaciertos++;	
 				Sleep(3000);
 				}
                 
                 system ("cls");
                 system("Color 3e");
                 if (num_random == 1){
-                cout<<"El número 1 no es primo, ni compuesto" <<endl;	
+                cout<<"El número 1 no es primo, ni compuesto" <<endl;
+				cout<<"El número 1 solo tiene un divisor, que es 1, por lo tanto no es un número primo ni tampoco compuesto. " <<endl;
 				}
-                else if(num_random % 2 != 0 or num_random == 2){
+				        
+				    do {
+		            if (num_random%divisiones == 0){
+			        residuo++;
+		          }
+		          divisiones++;
+				  }while (divisiones <=num_random);
+
+  if (residuo == 2 or num_random == 2 or num_random == 3) {
                 cout<<"El número " <<num_random <<" es primo";
 				Sleep (3000);	
                 system ("cls");
+    cout<<"Los números primos son aquellos cuales tienen 2 divisores: el número 1 y el mismo número."<<endl;            
     cout<<"Los números primos son muy importantes en muchas cosas que usamos todos los días. Por ejemplo, cuando jugamos video-"<<endl;
 	cout<<"juegos o usamos contraseñas en nuestra computadora, los números primos nos ayudan a mantenernos seguros. Los cientí-"<<endl;
 	cout<<"ficos usan estos números para proteger la información y mantenerla privada. También se encuentran presentes en las"<<endl;
 	cout<<"matemáticas y la ciencia de la computación. Los matemáticos estudian los números primos y descubren cosas interesan-"<<endl;
 	cout<<"tes sobre ellos. Además, los números primos se utilizan en las computadoras para hacer muchas cosas, como crear nú-"<<endl;
-	cout<<"meros aleatorios en juegos o en programas especiales.";
+	cout<<"meros aleatorios en juegos o en programas especiales." <<endl;
                 cant_nump++;
                 system ("pause");
                 system ("cls");
@@ -174,11 +191,12 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
 				 }
 				if ((potenciacion + 1)/3 % 2 != 0 and num_random > 2){
 				cout<<"(2^" <<num_random <<"+1)/3" <<" = "	<<(potenciacion + 1)/3<<endl;
-				cout<<"El número " <<num_random <<" es un número primo de Wagstaff" <<endl;	
+				cout<<"El número " <<num_random <<" es un número primo de Wagstaff" <<endl;
+				cant_numW++;
 				}
 				
+				else if(num_random == 2){cout<<"El número 2 no es un número primo de Wagstaff en ningun caso" <<endl;}
 				else{
-				cout<<"Nota: El número 2 no es un número primo de Wagstaff en ningun caso" <<endl;
 				cout<<"(2^" <<num_random <<"+1)/3" <<" = "	<<(potenciacion + 1)/3<<endl;
 				cout<<"El número " <<num_random <<" no es un número primo de Wagstaff" <<endl;		
 				}
@@ -193,6 +211,7 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
 				cout<<"2*" <<num_random <<"+1" <<" = "	<<2*num_random + 1<<endl;
 				cout<<"El número " <<num_random <<" es un número primo de Sophie Germain" <<endl;
 				system ("pause");
+				cant_numS++;
 				}
 				
 				else{
@@ -210,7 +229,8 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
 				 }
 				if ((potenciacion - 1) % 2 != 0 ){
 				cout<<"2^" <<num_random <<"-1" <<" = "	<<(potenciacion - 1)<<endl;
-				cout<<"El número " <<num_random <<" es un número primo de Mersenne" <<endl;	
+				cout<<"El número " <<num_random <<" es un número primo de Mersenne" <<endl;
+				cant_numM++;	
 				}
 				
 				else{
@@ -233,14 +253,63 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
 				}while(opcion_m2 != 4);
 				}
 				
-				else{
-				cout<<"El número " <<num_random <<" es compuesto";	
-				cant_numc++;	
+
+ 
+              else {
+			n2=num_random;
+			cant_numc++;
+			cout<<"El número " <<num_random <<" es compuesto" <<endl;
+				
+			cout << "Porque sus divisores son: ";
+			for (int j = 1; j <= num_random; j++) {
+                if (num_random % j == 0) {
+                    cout << j << " ";
+                    }
+                      }
+				cout<<endl;
+				cout<<"Su descomposicion en factores primos es: "<<endl;
+			for (int w = 2; w <= num_random; ++w) {
+        while (num_random % w == 0) {
+            cout << w;
+            num_random /= w;
+            if(w<num_random){
+            	cout<<"*";
+            }
+            
+        }
+}
+cout<<"="<<n2;	  	
 				}
+				cout<<endl;
 				system ("pause");
             	system ("cls");
                 break;
             case '2':
+            system ("cls");	
+              cout<<"Números ingresados por el usuario: "<<num_ingresados<<endl;
+              cout<<"Cantidad de números primos: " <<cant_nump <<endl;
+              cout<<"    Cantidad de números primos de Wagstaff: " <<cant_numW <<endl;
+              cout<<"    Cantidad de números primos de Sophie Germain: " <<cant_numS <<endl;
+              cout<<"    Cantidad de números primos de Mersenne: " <<cant_numM <<endl;
+
+            	if(aciertos == 0){
+            		cout<<"Porcentaje de aciertos: 0%"<<endl;
+            		cout<<"Porcentaje de números primos: 0%" <<endl;
+            		cout<<"    Porcentaje de números primos de Wagstaff: 0% "<<endl;
+                    cout<<"    Porcentaje de números primos de Sophie Germain: 0%" <<endl;
+                    cout<<"    Porcentaje de números primos de Mersenne: 0%" <<endl;
+            	}else{
+            		cout<<"Porcentaje de aciertos: "<<aciertos/(aciertos+desaciertos)*100<<"%"<<endl;
+            		cout<<"Porcentaje de números primos: " <<cant_nump/(cant_nump+cant_numc)*100<<"%" <<endl;
+                    cout<<"    Porcentaje de números primos de Wagstaff: " <<cant_numW/cant_nump*100<<"%" <<endl;
+                    cout<<"    Porcentaje de números primos de Sophie Germain: " <<cant_numS/cant_nump*100<<"%" <<endl;
+                    cout<<"    Porcentaje de números primos de Mersenne: " <<cant_numM/cant_nump*100<<"%" <<endl;
+            	}
+            cout<<"Mayor número generado: "<<valor_max <<endl;
+            cout<<"Menor número generado: "<<valor_min <<endl;
+            
+            
+            system("pause");
             system ("cls");
                 break;
             case '3':
@@ -254,7 +323,7 @@ cout << "/____/\\__,_/\\___/_/   \\__/\\___/ " <<endl;
 		system("pause");
 		system ("cls");
                 break;
-        }
-	
+}
 }while (opcion != 3);
+
 }//main
