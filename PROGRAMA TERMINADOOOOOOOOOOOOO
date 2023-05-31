@@ -381,7 +381,7 @@ cout<<"="<<num_random;
               cout<<"    Cantidad de números primos de Sophie Germain: " <<cant_numS <<endl;
               cout<<"    Cantidad de números primos de Mersenne: " <<cant_numM <<endl;
 
-            	if(intentos == 0){
+            	if(num_ingresados == 0){
             		cout<<"Porcentaje de aciertos: 0%"<<endl;
             		cout<<"Porcentaje de números primos: 0%" <<endl;
             		cout<<"    Porcentaje de números primos de Wagstaff: 0% "<<endl;
