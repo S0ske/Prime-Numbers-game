@@ -1,0 +1,186 @@
+#include <iostream>
+#include <conio.h>
+#include <locale>
+#include <iomanip>
+#include <windows.h>
+using namespace std;
+
+int N, x, z, cont_pcoincidentes=0, cont_peajescoin=0, centinela;
+int vid;
+char opcion;
+
+int main(){
+
+setlocale(LC_ALL, "Spanish");	
+do{
+cout<<"Ingrese la cantidad de clientes: "; cin>>N;
+if(N<=0){
+cout<<"\nIngrese una cantidad valida de clientes"<<endl;	
+}
+
+
+}while(N<=0);
+int id [N];
+int id_peaje[N];
+int vidcliente;
+int vidpeaje;
+int vecescliente[N]={0};
+string nombre [N];
+string nombre_peaje[N];
+string ubicacion_p[N];
+float precios[7][6];
+system("pause");system("cls");
+
+//declarar los arreglos
+
+    do {
+    	cout << "Gestión de Peajes Ruta Montería - Cartagena" << endl;
+        cout << "1. Registrar clientes" << endl;
+        cout << "2. Registrar peajes" << endl;
+        cout << "3. Registrar precio de los peajes" << endl;
+        cout << "4. Registrar viajes" << endl;
+        cout << "5. Consultar un cliente" << endl;
+        cout << "6. Consultar un peaje" << endl;
+        cout << "7. Estadísticas" << endl;
+        cout << "8. Salir" << endl;
+
+        opcion = getch();
+
+        switch (opcion) {
+            case '1':
+            	{
+            	
+            	
+            	system("cls");
+                cout << "Has seleccionado la opción Registrar clientes." << endl;
+                system("pause");system("cls");
+                for (x = 0; x<N; x++){
+                do {
+                
+				cout << "Ingrese su ID: "; cin>>id [x];
+				if (id [x]<=0){
+					cout<<"Ingrese una ID valida";
+					system("pause");
+					system ("cls");
+				}
+			    } while (id [x]<=0);
+				cout << "Ingrese su nombre: "; fflush (stdin); getline (cin, nombre [x]);
+				}// Implementa la lógica para registrar clientes aquí
+                }// corchete case 1
+				break;
+            case '2':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Registrar peajes." << endl;
+                system("pause");system("cls");
+                
+                for(x=0; x<7; x++){
+                	
+                	do{
+					
+                	cout<<"Ingrese el id(número) del peaje #"<<x+1<<": ";cin>>id_peaje[x];cout<<endl;
+                	
+                	if(id_peaje[x]<=0){
+                		cout<<"Ingrese una ID válida."<<endl;
+                		system("pause");
+						system ("cls");
+					}
+                }while(id_peaje[x]<=0);
+                	cout<<"Ingrese el nombre del peaje #"<<x+1<<": ";cin>>nombre_peaje[x];cout<<endl;
+                	cout<<"Ingrese la ubicación del peaje #"<<x+1<<": ";cin>>ubicacion_p[x];cout<<endl;
+				}
+                
+                // Implementa la lógica para registrar peajes aquí
+                break;
+            case '3':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Registrar precio de los peajes." << endl;
+                system("pause");system("cls");
+                
+                cout<<"- Cat 1: Automóviles, camperos, camionetas."<<endl<<"- Cat 2: Buses, busetas con eje trasero de doble llanta y camiones de dos ejes."<<endl<<"- Cat 3: Camiones de tres y cuatro ejes."<<endl<<"- Cat 4: Camiones de cinco ejes."<<endl<<"- Cat 6: Camiones de seis ejes."<<endl;
+                for(x=0; x<7; x++){
+                	cout<<"Ingrese el id del peaje #"<<x+1<<": ";cin>>vid;cout<<endl;
+                	
+                	if(vid==id_peaje[x]){
+					
+                	for(z=0; z<6; z++){
+                		do{
+						
+                		cout<<"Ingrese el precio del Cat #"<<z+1<<": ";cin>>precios[x][z];cout<<endl;
+                		if(precios[x][z]<=0){
+                			cout<<"Dato inválido."<<endl;
+                			system("pause");
+                			system("cls");
+						}
+                	}while(precios[x][z]<=0);
+					}//for columnas
+				}else{
+					cout<<"Dato no coincidente."<<endl;
+				}
+				}//for precios de peajes
+                // Implementa la lógica para registrar el precio de los peajes aquí
+                break;
+            case '4':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Registrar viajes." << endl;
+                system("pause");system("cls");
+                
+                for(x=0; x<N; x++){
+                	cout<<"Ingrese el ID del cliente: ";cin>>vidcliente;cout<<endl;
+                	if(vidcliente==id[x]){
+                		cont_pcoincidentes++;
+                		for(x=0; x<7; x++){
+                			cout<<"Ingrese el ID del peaje: ";cin>>vidpeaje;cout<<endl;
+                			if(vidpeaje==id_peaje[x]){
+                				cont_peajescoin++;
+                				do{
+                					cout<<"¿Desea registrar un viaje?"<<endl;
+                					
+                					cout<<"[1]Sí.              [2]No.";cin>>centinela;cout<<endl;
+                					
+                					if(centinela==1){
+                						vecescliente[x]++;
+									}
+								}while(centinela==1);
+							}
+						}//for verificación id del peaje
+						if(cont_peajescoin==0){
+						cout<<"Datos [ID del peaje] no coincidentes."<<endl;
+					}//if
+				}
+			}
+				if(cont_pcoincidentes==0){
+					cout<<"Datos [ID del cliente] no coincidentes."<<endl;
+				}
+                // Implementa la lógica para registrar viajes aquí
+                break;
+            case '5':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Consultar un cliente." << endl;
+                system("pause");system("cls");
+                // Implementa la lógica para consultar un cliente aquí
+                break;
+            case '6':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Consultar un peaje." << endl;
+                system("pause");system("cls");
+                // Implementa la lógica para consultar un peaje aquí
+                break;
+            case '7':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Estadísticas." << endl;
+                system("pause");system("cls");
+                // Implementa la lógica para mostrar estadísticas aquí
+                break;
+            case '8':
+            	system("cls");
+                cout << "\nSaliendo del programa..." << endl;
+                exit(0);
+                break;
+            default:
+                cout << "\nOpción no válida. Ingresa una opción válida (1-8)." << endl;
+        }
+
+    } while (opcion != '8');
+
+
+}//main
