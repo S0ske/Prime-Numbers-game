@@ -1,0 +1,374 @@
+//Código de estudiante: 0222310016 Nombre: Valeria Silva Guerrero
+//Código de estudiante: 0222310031 Nombre: Juan Esteban Polo Bello
+//Código de estudiante: 0222310024 Nombre: Cristina Isabel Parra Orozco
+
+#include <iostream>
+#include <conio.h>
+#include <locale>
+#include <iomanip>
+#include <windows.h>
+using namespace std;
+
+int N, n, x, z, y, cont_pcoincidentes=0, cont_peajescoin=0, centinela, n_peaje ;
+int vid;
+char opcion;
+string nombremax;
+int viajesmax;
+float canceladomax;
+
+int main(){
+system("Title Gestión de Peajes Ruta Montería - Cartagena");
+setlocale(LC_ALL, "Spanish");	
+system("Color f1");
+do{
+cout<<"Ingrese la cantidad de clientes: "; cin>>N;
+if(N<=0){
+cout<<"\nIngrese una cantidad válida de clientes"<<endl;	
+}
+
+}while(N<=0);
+
+do{
+	cout<<"Ingrese la cantidad de viajes máximos que el cliente puede realizar: ";cin>>n;cout<<endl;
+	
+	if(n<=0){
+		cout<<"\nIngrese una cantidad válida de viajes máximos"<<endl;	
+	}
+}while(n<=0);
+
+int id [N];
+int id_peaje[7];
+int viajes[N][n];
+cantviajes_cliente[N]={0};
+string u_peaje[7][2];
+float acum_despeajes[7];
+float acumuladorclientesviajes=0;
+float acumuladordesprecios=0;
+
+int vviajes[N];
+float acum_peajes[7];
+string nombreMaximo;
+int vidcliente;
+int vidpeaje;
+int vecescliente[N]={0};
+int preciofinal[N];
+int cat[N][n];
+float des_precios[N]={0};
+float acu_clienteviajes[N]={0};
+float acu_desprecios[N]={0};
+string nombre [N];
+string nombre_peaje[7];
+string ubicacion_p[3];
+float precios[7][5];
+int indiceMaximo = 0;
+system("pause");system("cls");
+
+//declarar los arreglos
+
+    do {
+    	system("cls");
+    	
+    	cout << "Gestión de Peajes Ruta Montería - Cartagena" << endl;
+        cout << "1. Registrar clientes" << endl;
+        cout << "2. Registrar peajes" << endl;
+        cout << "3. Registrar precio de los peajes" << endl;
+        cout << "4. Registrar viajes" << endl;
+        cout << "5. Consultar un cliente" << endl;
+        cout << "6. Consultar un peaje" << endl;
+        cout << "7. Estadísticas" << endl;
+        cout << "8. Salir" << endl;
+
+        opcion = getch();
+
+        switch (opcion) {
+            case '1':
+            	{
+            	
+            	system("cls");
+                cout << "Has seleccionado la opción Registrar clientes." << endl;
+                system("pause");system("cls");
+                for (x = 0; x<N; x++){
+                do {
+                
+				cout << "Ingrese el ID del cliente #"<<x+1<<": "; cin>>id [x];cout<<endl;
+				if (id [x]<=0){
+					cout<<"Ingrese una ID valida";
+					system("pause");
+					system ("cls");
+				}
+			    } while (id [x]<=0);
+				cout << "Ingrese el nombre del cliente #"<<x+1<<": "; fflush (stdin); getline (cin, nombre [x]);cout<<endl;
+				}// Implementa la lógica para registrar clientes aquí
+                }// corchete case 1
+                
+				break;//break case 1
+            case '2':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Registrar peajes." << endl;
+                system("pause");system("cls");
+                
+                for(x=0; x<7; x++){
+                	do{
+					
+                	cout<<"Ingrese el ID del peaje #"<<x+1<<": ";cin>>id_peajes[x];cout<<endl;
+                	
+                	if(id_peaje[x]<=0){
+                		cout<<"Ingrese una ID válida."<<endl;
+                		system("pause");
+						system ("cls");
+					}
+                   }while(id_peaje[x]<=0);
+                   
+                   for(y=0; y<2; y++){
+                   	if(y==0){
+                   		cout<<"Ingrese la ubicación del peaje #"<<x+1<<": ";fflush(stdin);getline(cin, u_peaje[x][0]);cout<<endl;
+					   }
+                   	if(y==1){
+                   		cout<<"Ingrese el nombre del peaje #"<<x+1<<": ";fflush(stdin);getline(cin, u_peaje[x][1]);cout<<endl;
+					   }
+                   	
+				   }
+                   	
+ 	
+				}// for id del peaje
+               
+                // Implementa la lógica para registrar peajes aquí
+                break;
+            case '3':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Registrar precio de los peajes." << endl;
+                system("pause");system("cls");
+                
+                cout<<"- Cat 1: Automóviles, camperos, camionetas."<<endl<<"- Cat 2: Buses, busetas con eje trasero de doble llanta y camiones de dos ejes."<<endl<<"- Cat 3: Camiones de tres y cuatro ejes."<<endl<<"- Cat 4: Camiones de cinco ejes."<<endl<<"- Cat 5: Camiones de seis ejes."<<endl;
+                system("pause");
+				for(x=0; x<7; x++){
+                	system("cls");
+                	cout<<"Ingrese el id del peaje #"<<x+1<<": ";cin>>vid;cout<<endl;
+                	
+                	if(vid==id_peaje[x]){
+					
+                	for(z=0; z<5; z++){
+                		do{
+						
+                		cout<<"Ingrese el precio del Cat #"<<z+1<<": ";cin>>precios[x][z];cout<<endl;
+                		if(precios[x][z]<=0){
+                			cout<<"Dato inválido."<<endl;
+                			system("pause");
+                			system("cls");
+						}
+                	}while(precios[x][z]<=0);
+					}//for columnas
+				}else{
+					cout<<"ID inválido."<<endl;
+					x-=1;
+				}
+				}//for precios de peajes
+                // Implementa la lógica para registrar el precio de los peajes aquí
+                system("pause");
+                break;
+            case '4':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Registrar viajes." << endl;
+                system("pause");system("cls");
+                
+                for(x=0; x<N; x++){
+                	cout<<"Ingrese el ID del cliente #"<<x+1<<": ";cin>>vidcliente;cout<<endl;
+                	if(vidcliente==id[x]){
+                		
+                		for(y=0; y<7; y++){
+                			
+                			cout<<"Ingrese el ID del peaje #"<<y+1<<": ";cin>>vidpeaje;cout<<endl;
+                			if(vidpeaje==id_peaje[y]){
+                				
+                				//viajes[N][n]
+                				do{
+                				cout<<"¿Desea registrar un viaje en el peaje #"<<y+1<<"?"<<endl;
+                				cout<<"[1]Sí                               [2]No."<<endl;
+                				cin>>centinela;
+                				if(centinela==1){
+                					do{
+                						cout<<"Ingrese la categoría automotora del cliente en el viaje #"<<cantviajes_cliente[x]+1<<": ";cin>>verificarcat;cout<<endl;
+                						if(verificarcat<1 or verificarcat>5){
+										cout<<"Dato inválido ingresado."<<endl;
+											}
+									}while(verificarcat<1 or verificarcat>5);
+                				cat[x][cantviajes_cliente[x]]=verificarcat;
+                					
+								}
+                					
+                				
+                				//viajes[0][1]=0
+                				viajes[x][cantviajes_cliente[x]]=y;
+                				cantviajes_cliente[x]++;
+								}while(centinela==1);
+	
+							}else{
+								cout<<"ID inválido."<<endl;
+								y-=1;
+							}
+						
+						}//for verificación id del peaje
+						
+						/*do{
+						cout<<"Ingrese la categoría automotora del cliente #"<<x+1<<": ";cin>>verificarcat;cout<<endl;
+						//cat[x][cantviajes_cliente[x]];cout<<endl;
+							if(verificarcat<1 or verificarcat>5){
+							cout<<"Dato inválido ingresado."<<endl;
+				}
+			}while(verificarcat<1 or verificarcat>5);
+			
+			for(icc=0; icc<cantviajes_cliente[x]; icc++){
+				cat[x][icc]=verificarcat;
+			}*/
+			
+						
+				}else{
+					cout<<"ID inválido."<<endl;
+					x-=1;
+				}
+				
+				 /*for (int i = 0; i < N; i++) {
+        if (vecescliente[i] > vecescliente[indiceMaximo]) {
+            indiceMaximo = i;
+        }
+    }
+	string nombreMaximo = nombre_peaje[indiceMaximo];*/
+
+		for(y=0; y<7; y++){
+			switch(cat[x][cantviajes_cliente[x]]){
+				case 1: 
+				
+				
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				case 4:
+					
+					break;
+				case 5:
+					
+					break;
+			}
+			acum_peajes[y]+=preciofinal[x];
+			acum_despeajes[y]+=des_precios[x];
+		}
+			system("cls");
+			
+			
+				acumuladordesprecios+=des_precios[x];
+			acu_desprecios[x]=acumuladordesprecios;
+			acumuladorclientesviajes+=preciofinal[x];
+			acu_clienteviajes[x]=acumuladorclientesviajes;
+			cout<<"Valor a pagar: "<<acumuladorclientesviajes<<endl;
+			
+			system("pause");
+			
+			}
+				
+                // Implementa la lógica para registrar viajes aquí
+                break;
+            case '5':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Consultar un cliente." << endl;
+                system("pause");system("cls");
+                for(x=0; x<N; x++){
+                	cout<<"Introduzca el ID del cliente: ";cin>>vidcliente;cout<<endl;
+                	if(vidcliente==id[x]){
+                		cout<<"Nombre: "<<nombre [x]<<endl;
+                		cout<<"Categoría de automotor: "<<cat[x]<<endl;
+                		cout<<"Valor cancelado: "<<preciofinal[x]<<endl;
+                		cout<<"Total de viajes: "<<vecescliente[x]<<endl;
+                		cout<<"Valor pagado en total que ha acumulado por todos sus tránsitos: "<<acu_clienteviajes[x]<<endl;
+                		cout<<"Total ahorrado: "<<acu_desprecios[x]<<endl;
+                		cout<<"Peaje mas utilizado: " <<nombreMaximo <<endl;
+					}else{
+						cout<<"Dato no coincidente."<<endl;
+						x-=1;
+					}
+				}
+				system("pause");
+                // Implementa la lógica para consultar un cliente aquí
+                break;
+            case '6':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Consultar un peaje." << endl;
+                system("pause");system("cls");
+                
+                for(y=0; y<7; y++){
+                			cout<<"Ingrese el ID del peaje #"<<y+1<<": ";cin>>vidpeaje;cout<<endl;
+                			if(vidpeaje==id_peaje[y]){
+                				for(x=0; x<N; x++){
+                					cout<<"Nombre: "<<nombre [x]<<endl;
+                					cout<<"Tipo de vehículo: "<<cat[x]<<endl;
+                					cout<<"Precio del peaje: "<<precios[y][x]<<endl;
+                					
+				}
+                				
+                				
+							}else{
+								cout<<"ID inválido."<<endl;
+								y-=1;
+							}
+						}
+                
+                // Implementa la lógica para consultar un peaje aquí
+                system("pause");
+                break;
+            case '7':
+            	system("cls");
+                cout << "\nHas seleccionado la opción Estadísticas." << endl;
+                system("pause");system("cls");
+                
+                for(x=0; x<N; x++){
+                	cout<<"ID del cliente: "<<id[x]<<endl;
+                	cout<<"Nombre del cliente: "<<nombre[x]<<endl;
+                	cout<<"Cantidad de viajes realizados: "<<vviajes[x]<<endl;
+                	cout<<"Total cancelado por peaje: "<<preciofinal[x]<<endl;
+                	cout<<"Cantidad de dinero ahorrado por los descuentos efectuados: "<<acu_desprecios[x]<<endl;
+                	cout<<"Cliente que más viajes realizó: ";
+                	for(x=0; x<N; x++){
+                		if(x==0){
+                			nombremax=nombre[x];
+                			viajesmax=vviajes[x];
+                			canceladomax=preciofinal[x];
+						}else{
+							if(vviajes[x]>viajesmax){
+								nombremax=nombre[x];
+                				viajesmax=vviajes[x];
+                				canceladomax=preciofinal[x];
+							}
+						}
+					}
+					cout<<nombremax<<endl;
+					cout<<"Número de viajes que realizó: "<<viajesmax<<endl;
+					cout<<"Total cancelado: "<<preciofinal[x]<<endl;
+				}
+				
+				cout<<"-------------"<<endl;
+				for(y=0; y<7; y++){
+					cout<<"Id del peaje: "<<id_peaje[y]<<endl;
+					cout<<"Nombre del peaje: "<<nombre_peaje[y]<<endl;
+					cout<<"Total recaudado: "<<acum_peajes[y];
+					cout<<"Total dejado de recibir por descuentos: "<<acum_despeajes[y];
+					
+				}
+				system("pause");
+                // Implementa la lógica para mostrar estadísticas aquí
+                break;
+            case '8':
+            	system("cls");
+                cout << "\nSaliendo del programa..." << endl;
+                exit(0);
+                break;
+            default:
+                cout << "\nOpción no válida. Ingresa una opción válida (1-8)." << endl;
+        }
+
+    } while (opcion != '8');
+
+
+}//main
